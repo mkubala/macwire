@@ -8,14 +8,15 @@ private[dependencyLookup] class ImplicitValueOfTypeFinder[C <: Context](val c: C
   import c.universe._
 
   def find(t: Type): Option[c.Tree] = {
-    debug("Looking for implicit value")
-    c.inferImplicitValue(t, true, false, c.enclosingPosition) match {
-      case EmptyTree =>
-        debug("There is no implicit values in scope")
-        None
-      case tree => {
-        debug("Found matching implicit value")
-        Some(tree)
+    debug.withBlock("Looking for implicit value") {
+      c.inferImplicitValue(t, true, false, c.enclosingPosition) match {
+        case EmptyTree =>
+          debug("There is no implicit values in scope")
+          None
+        case tree => {
+          debug("Found matching implicit value")
+          Some(tree)
+        }
       }
     }
   }

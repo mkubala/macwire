@@ -10,7 +10,7 @@ private[dependencyLookup] class ValuesOfTypeInEnclosingClassFinder[C <: Context]
 
   private val typeCheckUtil = new TypeCheckUtil[c.type](c, debug)
 
-  def find(param: Symbol, t: Type, implicitValue: Option[Tree]): List[Tree] = {
+  def find(t: Type, implicitValue: Option[Tree]): List[Tree] = {
 
     @tailrec
     def doFind(trees: List[Tree], acc: List[Name]): List[Name] = trees match {

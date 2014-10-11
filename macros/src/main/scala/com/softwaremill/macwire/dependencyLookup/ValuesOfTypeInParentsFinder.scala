@@ -10,7 +10,7 @@ private[dependencyLookup] class ValuesOfTypeInParentsFinder[C <: Context](val c:
 
   private val typeCheckUtil = new TypeCheckUtil[c.type](c, debug)
 
-  def find(param: Symbol, t: Type, implicitValue: Option[Tree]): List[Tree] = {
+  def find(t: Type, implicitValue: Option[Tree]): List[Tree] = {
     def checkCandidate(tpt: Type): Boolean = {
       val typesToCheck = tpt :: (tpt match {
         case NullaryMethodType(resultType) => List(resultType)
